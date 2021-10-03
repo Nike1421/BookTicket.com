@@ -1,0 +1,124 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block content %}
+
+<style type="text/css">
+    @media screen and (min-width: 800px) {
+        .dashboard {
+            display: flex;
+        }
+
+        .dashboard .text-content {
+            width: 70%;
+            margin-left: 40px;
+        }
+
+        .dashboard .poster-container {
+            width: 400px;
+        }
+    }
+
+    .dashboard {
+        margin: 15px;
+    }
+
+    .dashboard .poster-container {
+        border-radius: 10px;
+        background-color: red;
+    }
+
+    .dashboard .poster-container img {
+        border-radius: 10px;
+    }
+
+    .dashboard .title {
+        font-size: 40px;
+        font-weight: 600;
+    }
+
+    .dashboard .rating {
+        font-size: 20px;
+    }
+
+    .dashboard .rating span {
+        font-size: 14px;
+    }
+
+    .dashboard .text-content {
+        padding-top: 40px;
+    }
+
+    button.read-more {
+        background: none !important;
+        border: none;
+        padding: 0 !important;
+        color: #069;
+        cursor: pointer;
+    }
+
+    button.read-more:focus {
+        outline: none;
+    }
+
+    .book-now {
+        border-radius: 1px;
+        border: solid 1px black;
+        height: 50px;
+    }
+
+    .book-now:focus {
+        outline: none;
+    }
+
+    .book-now:hover {
+        background-color: black;
+        color: white;
+    }
+</style>
+
+
+
+<div class="dashboard">
+    <div class="poster-container">
+        <img src="#" height="400px">
+    </div>
+    <div class="text-content">
+        <h1 class="title">Wonder Woman 1984</h1>
+        <p class="rating">88% Liked this movie! <span>33.2k ratings</span></p>
+        <span class="description">
+            Diana must contend with a work colleague and businessman, whose desire for extreme wealth sends the world
+            down a path of
+            destruction, after an ancient artifact that grants wishes goes missing.
+        </span>
+        <button onclick="toggleDescExpand()" class="read-more">Read More</button>
+    </div>
+</div>
+
+<div style="display: flex; justify-content: center; align-items: center;">
+    <button class="book-now btn">BOOK TICKETS</button>
+</div>
+
+<script type="text/javascript">
+    let expanded = false
+    const desc = document.querySelector('.description')
+    const toggleButton = document.querySelector('.read-more')
+    const descText = desc.innerText
+    const toggleDescExpand = () => {
+        expanded ? (() => {
+            desc.innerText = descText.slice(0, 50) + '...'
+            toggleButton.innerText = 'Read More'
+        })() : (() => {
+            desc.innerText = descText
+            toggleButton.innerText = 'Read Less'
+        })()
+        expanded = !expanded
+    }
+    (descText.length < 50) ? (() => {
+        document.querySelector('.read-more').style.visibility = 'hidden'
+    })() : (() => {
+        toggleDescExpand()
+        toggleDescExpand()
+    })()
+</script>
+
+{% endblock %}
